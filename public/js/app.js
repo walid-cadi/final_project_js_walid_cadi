@@ -1,9 +1,11 @@
-let dataBase = [{
-  fullName: "admin",
-  email: "admin@gmail.com",
-  age: 25,
-  password:"ww@4zz",
-}];
+let dataBase = [
+  {
+    fullName: "admin",
+    email: "admin@gmail.com",
+    age: 25,
+    password: "ww@4zz",
+  },
+];
 class User {
   constructor(fullName, email, age, password) {
     this.fullName = fullName;
@@ -115,21 +117,30 @@ const signUp = () => {
 };
 //signUp();
 const logIn = () => {
-  let verifyemail = prompt("enter your email to logIn")
-  if (dataBase.find(el => el.email == verifyemail)) {
+  let verifyemail = prompt("enter your email to logIn");
+  if (dataBase.find((el) => el.email == verifyemail)) {
     let verifypass = prompt("enter your password to logIn");
     if (dataBase.find((el) => el.password == verifypass)) {
-      alert("now you log in")
+      alert("now you log in");
     } else {
       alert("password are wrong");
     }
   } else {
-    alert("the email are wrong")
+    alert("the email are wrong");
   }
-}
+};
 //logIn();
-let user = new User();
-
+const changePassword = () => {
+  let verifyemail = prompt("enter your email to change password");
+  let findemail = dataBase.find(el => el.email == verifyemail)
+  if (findemail) {
+    let newPass = prompt("enter the new password")
+    findemail.password = newPass
+  } else {
+    alert("email are wrong")
+  }
+};
+//changePassword();
 const choosing = () => {
   let choose = prompt(
     "choose what you want and type it : SignUp or LogIn or Change Password or exict"
@@ -142,13 +153,11 @@ const choosing = () => {
   if (choose == "SignUp") {
     //signUp();
   } else if (choose == "LogIn") {
-    logIn()
+    //logIn()
   } else if (choose == "ChangePassword") {
-  } else if (choose == "exict") {
+    changePassword();
   }
 };
 choosing();
 
 console.table(dataBase);
-
-
