@@ -51,6 +51,20 @@ const validateAge = (age) => {
   }
   return nospacesage
 }
+const validatePass = (password) => {
+  let nospacepass = password.trim();
+  let removespace = nospacepass.replace(/\s/g, "");
+  const regex = /[!@#\-+*\/]/;
+  if (!regex.test(removespace)) {
+    alert("password most have one or more special char")
+    return false;
+  }
+  if (removespace.length < 7 ) {
+    alert("password is less than 7")
+    return false;
+  }
+  return removespace
+}
 const signUp = () => {
   //full name
   let fullname = prompt("enter your full name");
@@ -70,14 +84,17 @@ const signUp = () => {
     age = prompt("enter your age");
   }
   age = validateAge(age)
-
-
   //password
-  //let password = prompt("enter your password");
+  let password = prompt("enter your password");
+  while (!validatePass(password)) {
+    password = prompt("enter your password");
+  }
+  password = validatePass(password)
+
   //confirmP
   //let confirmP = prompt("confirm your Password");
   //alert("you are sign Up");
-  let user = new User(fullname,email,age);
+  let user = new User(fullname,email,age,password);
   dataBase.push(user);
 };
 //signUp();
