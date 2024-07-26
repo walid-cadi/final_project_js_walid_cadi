@@ -1,4 +1,9 @@
-let dataBase = [];
+let dataBase = [{
+  fullName: "admin",
+  email: "admin@gmail.com",
+  age: 25,
+  password:"ww@4zz",
+}];
 class User {
   constructor(fullName, email, age, password) {
     this.fullName = fullName;
@@ -30,41 +35,45 @@ const validateEmail = (email) => {
   let removespace = lowercaseemail.replace(/\s/g, "");
   if (removespace.length < 10) {
     alert("the email most be more than 10 char");
-    return false
+    return false;
   }
-  const at = removespace.split('@').length - 1;
+  const at = removespace.split("@").length - 1;
   if (at !== 1) {
-    alert("you need @ at your email")
-    return false
+    alert("you need @ at your email");
+    return false;
   }
-  return removespace
-}
+  if (dataBase.find((el) => el.email == email)) {
+    alert("the email has already taken");
+    return false;
+  }
+  return removespace;
+};
 const validateAge = (age) => {
   let nospacesage = age.trim();
   if (!/^[0-9]+$/.test(nospacesage)) {
     alert("age is number try again");
-    return false
+    return false;
   }
   if (!/^\d{1,2}$/.test(nospacesage) || nospacesage == 0) {
     alert("age most be 2 number try again");
     return false;
   }
-  return nospacesage
-}
+  return nospacesage;
+};
 const validatePass = (password) => {
   let nospacepass = password.trim();
   let removespace = nospacepass.replace(/\s/g, "");
   const regex = /[!@#\-+*\/]/;
   if (!regex.test(removespace)) {
-    alert("password most have one or more special char")
+    alert("password most have one or more special char");
     return false;
   }
-  if (removespace.length < 7 ) {
-    alert("password is less than 7")
+  if (removespace.length < 7) {
+    alert("password is less than 7");
     return false;
   }
-  return removespace
-}
+  return removespace;
+};
 const signUp = () => {
   //full name
   let fullname = prompt("enter your full name");
@@ -77,24 +86,31 @@ const signUp = () => {
   while (!validateEmail(email)) {
     email = prompt("enter your email");
   }
-  email = validateEmail(email)
+  email = validateEmail(email);
   //age
   let age = prompt("enter your age");
   while (!validateAge(age)) {
     age = prompt("enter your age");
   }
-  age = validateAge(age)
+  age = validateAge(age);
   //password
   let password = prompt("enter your password");
   while (!validatePass(password)) {
     password = prompt("enter your password");
   }
-  password = validatePass(password)
-
+  password = validatePass(password);
   //confirmP
-  //let confirmP = prompt("confirm your Password");
-  //alert("you are sign Up");
-  let user = new User(fullname,email,age,password);
+  let confirmP = prompt("confirm your Password");
+  confirmP = confirmP.trim();
+  confirmP = confirmP.replace(/\s/g, "");
+  while (confirmP != password) {
+    confirmP = prompt("password not match try again");
+    if (confirmP != password) {
+      return;
+    }
+  }
+  alert("you are sign Up");
+  let user = new User(fullname, email, age, password);
   dataBase.push(user);
 };
 //signUp();
