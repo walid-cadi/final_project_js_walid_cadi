@@ -39,6 +39,18 @@ const validateEmail = (email) => {
   }
   return removespace
 }
+const validateAge = (age) => {
+  let nospacesage = age.trim();
+  if (!/^[0-9]+$/.test(nospacesage)) {
+    alert("age is number try again");
+    return false
+  }
+  if (!/^\d{1,2}$/.test(nospacesage) || nospacesage == 0) {
+    alert("age most be 2 number try again");
+    return false;
+  }
+  return nospacesage
+}
 const signUp = () => {
   //full name
   let fullname = prompt("enter your full name");
@@ -46,24 +58,26 @@ const signUp = () => {
     fullname = prompt("enter your full name");
   }
   fullname = validateFullName(fullname);
-  
   //email
-  
   let email = prompt("enter your email");
   while (!validateEmail(email)) {
     email = prompt("enter your email");
   }
   email = validateEmail(email)
   //age
-  //let age = prompt("enter your age");
+  let age = prompt("enter your age");
+  while (!validateAge(age)) {
+    age = prompt("enter your age");
+  }
+  age = validateAge(age)
 
-  
+
   //password
   //let password = prompt("enter your password");
   //confirmP
   //let confirmP = prompt("confirm your Password");
   //alert("you are sign Up");
-  let user = new User(fullname,email);
+  let user = new User(fullname,email,age);
   dataBase.push(user);
 };
 //signUp();
