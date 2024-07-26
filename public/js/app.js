@@ -114,21 +114,35 @@ const signUp = () => {
   dataBase.push(user);
 };
 //signUp();
-
+const logIn = () => {
+  let verifyemail = prompt("enter your email to logIn")
+  if (dataBase.find(el => el.email == verifyemail)) {
+    let verifypass = prompt("enter your password to logIn");
+    if (dataBase.find((el) => el.password == verifypass)) {
+      alert("now you log in")
+    } else {
+      alert("password are wrong");
+    }
+  } else {
+    alert("the email are wrong")
+  }
+}
+//logIn();
 let user = new User();
 
 const choosing = () => {
   let choose = prompt(
     "choose what you want and type it : SignUp or LogIn or Change Password or exict"
   );
-  while (!choose || choose == "exict") {
-    choose = prompt(
-      "choose what you want and type it : SignUp or LogIn or Change Password or exict"
-    );
-  }
+  //while (!choose || choose == "exict") {
+  //  choose = prompt(
+  //    "choose what you want and type it : SignUp or LogIn or Change Password or exict"
+  //  );
+  //}
   if (choose == "SignUp") {
-    signUp();
+    //signUp();
   } else if (choose == "LogIn") {
+    logIn()
   } else if (choose == "ChangePassword") {
   } else if (choose == "exict") {
   }
@@ -137,10 +151,4 @@ choosing();
 
 console.table(dataBase);
 
-//let a = "walid cadi";
-//if (/[^a-zA-Z ]/.test(a)) {
-//  console.log("test");
-//}
-//let x = a.split(" ");
-//let z = x.map((e) => e[0].toUpperCase() + e.slice(1));
-//let f = z.join(" ");
+
