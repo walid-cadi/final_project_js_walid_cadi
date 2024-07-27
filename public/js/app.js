@@ -200,13 +200,15 @@ const logIn = () => {
 };
 // change password
 const changePassword = () => {
-  let verifyemail = prompt("enter your email to change password");
+  let verifyemail = prompt("enter your email ");
+  let verifypass = prompt("enter your password ");
   let findemail = dataBase.find((el) => el.email == verifyemail);
-  if (findemail) {
+  let findpass = dataBase.find((el) => el.password == verifypass);
+  if (findemail && findpass) {
     let newPass = prompt("enter the new password");
     findemail.password = newPass;
   } else {
-    alert("email are wrong");
+    alert("email or password are wrong");
   }
 };
 // main prompt
