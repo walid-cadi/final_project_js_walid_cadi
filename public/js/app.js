@@ -214,11 +214,11 @@ const choosing = () => {
   let choose = prompt(
     "choose what you want and type it : SignUp or LogIn or Change Password or exict"
   );
-  //while (!choose || choose == "exict") {
-  //  choose = prompt(
-  //    "choose what you want and type it : SignUp or LogIn or Change Password or exict"
-  //  );
-  //}
+  while (!choose || choose == "exict") {
+    choose = prompt(
+      "choose what you want and type it : SignUp or LogIn or Change Password or exict"
+    );
+  }
   if (choose.toLowerCase() == "signup") {
     signUp();
   } else if (choose.toLowerCase() == "login") {
