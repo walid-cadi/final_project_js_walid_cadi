@@ -131,6 +131,16 @@ const withdrawMoney = (user) => {
     user.balance -= getmoney;
   }
 }
+// deposit money
+const depositMoney = (user) => {
+  let putmoney = parseInt(prompt("how much money do you want to put"));
+  while (putmoney > 1000) {
+    alert("you can put money only less than 1000")
+    putmoney = parseInt(prompt("how much money do you want to put"))
+  }if (putmoney <= 1000) {
+    user.balance += putmoney
+  }
+}
 // bank acount
 const bankAcount = (user) => {
   alert(
@@ -149,6 +159,7 @@ const bankAcount = (user) => {
   } else if (choose.toLowerCase() == "withdraw money") {
     withdrawMoney(user)
   } else if (choose.toLowerCase() == "deposit money") {
+    depositMoney(user)
   }
 };
 // log in
