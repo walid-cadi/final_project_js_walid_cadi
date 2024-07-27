@@ -123,23 +123,38 @@ const signUp = () => {
 };
 // withdraw money
 const withdrawMoney = (user) => {
-  let getmoney = prompt("how much money do you want")
+  let getmoney = prompt("how much money do you want");
   while (getmoney > user.balance) {
     alert("sorry you dont have this much money");
-    getmoney = prompt("how much money do you want")
-  } if (getmoney <= user.balance) {
+    getmoney = prompt("how much money do you want");
+  }
+  if (getmoney <= user.balance) {
     user.balance -= getmoney;
   }
-}
+};
 // deposit money
 const depositMoney = (user) => {
   let putmoney = parseInt(prompt("how much money do you want to put"));
   while (putmoney > 1000) {
-    alert("you can put money only less than 1000")
-    putmoney = parseInt(prompt("how much money do you want to put"))
-  }if (putmoney <= 1000) {
-    user.balance += putmoney
+    alert("you can put money only less than 1000");
+    putmoney = parseInt(prompt("how much money do you want to put"));
   }
+  if (putmoney <= 1000) {
+    user.balance += putmoney;
+  }
+};
+// take a loan
+//not complet
+const takeAloan = (user) => {
+  let x = (user.balance * 20) / 100;
+  let loan = prompt("how much want to take the loan");
+  while (loan > x) {
+    loan = prompt("you can take loan of 20% of your acount balance");
+  }
+  user.balance += loan
+};
+// invest
+const invest = (user) => {
 }
 // bank acount
 const bankAcount = (user) => {
@@ -149,18 +164,23 @@ const bankAcount = (user) => {
   let choose = prompt(
     "choose what you want and type it : Logout or Withdraw money or Deposit money or Take a loan or Invest"
   );
-  while(!choose){
+  while (!choose) {
     choose = prompt(
       "choose what you want and type it : Logout or Withdraw money or Deposit money or Take a loan or Invest"
     );
   }
-  if (choose.toLowerCase() == "logout" ) {
-    return
+  if (choose.toLowerCase() == "logout") {
+    choosing();
   } else if (choose.toLowerCase() == "withdraw money") {
-    withdrawMoney(user)
+    withdrawMoney(user);
   } else if (choose.toLowerCase() == "deposit money") {
-    depositMoney(user)
+    depositMoney(user);
+  } else if (choose.toLowerCase() == "take a loan") {
+    takeAloan(user);
   }
+   else if (choose.toLowerCase() == "invest") {
+     invest(user);
+   }
 };
 // log in
 const logIn = () => {
