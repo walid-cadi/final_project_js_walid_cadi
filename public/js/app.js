@@ -1,19 +1,24 @@
+// dataBase
 let dataBase = [
   {
     fullName: "admin",
     email: "admin@gmail.com",
-    age: 25,
-    password: "ww@4zz",
+    age: "25",
+    password: "12345",
+    balance: 2500,
   },
 ];
+//class of user
 class User {
   constructor(fullName, email, age, password) {
     this.fullName = fullName;
     this.email = email;
     this.age = age;
     this.password = password;
+    this.balance = 2500;
   }
 }
+// validation
 const validateFullName = (fullname) => {
   let nospacesname = fullname.trim();
   let splitname = nospacesname.split(" ");
@@ -76,6 +81,7 @@ const validatePass = (password) => {
   }
   return removespace;
 };
+// sign up
 const signUp = () => {
   //full name
   let fullname = prompt("enter your full name");
@@ -115,13 +121,45 @@ const signUp = () => {
   let user = new User(fullname, email, age, password);
   dataBase.push(user);
 };
-//signUp();
+// withdraw money
+const withdrawMoney = (user) => {
+  let getmoney = prompt("how much money do you want")
+  while (getmoney > user.balance) {
+    alert("sorry you dont have this much money");
+    getmoney = prompt("how much money do you want")
+  } if (getmoney <= user.balance) {
+    user.balance -= getmoney;
+  }
+}
+// bank acount
+const bankAcount = (user) => {
+  alert(
+    `walcome ${user.fullName} to your bank acount your balnece is ${user.balance}$`
+  );
+  let choose = prompt(
+    "choose what you want and type it : Logout or Withdraw money or Deposit money or Take a loan or Invest"
+  );
+  while(!choose){
+    choose = prompt(
+      "choose what you want and type it : Logout or Withdraw money or Deposit money or Take a loan or Invest"
+    );
+  }
+  if (choose.toLowerCase() == "logout" ) {
+    return
+  } else if (choose.toLowerCase() == "withdraw money") {
+    withdrawMoney(user)
+  } else if (choose.toLowerCase() == "deposit money") {
+  }
+};
+// log in
 const logIn = () => {
   let verifyemail = prompt("enter your email to logIn");
-  if (dataBase.find((el) => el.email == verifyemail)) {
+  let findemail = dataBase.find((el) => el.email == verifyemail);
+  if (findemail) {
     let verifypass = prompt("enter your password to logIn");
     if (dataBase.find((el) => el.password == verifypass)) {
       alert("now you log in");
+      bankAcount(findemail);
     } else {
       alert("password are wrong");
     }
@@ -129,18 +167,18 @@ const logIn = () => {
     alert("the email are wrong");
   }
 };
-//logIn();
+// change password
 const changePassword = () => {
   let verifyemail = prompt("enter your email to change password");
-  let findemail = dataBase.find(el => el.email == verifyemail)
+  let findemail = dataBase.find((el) => el.email == verifyemail);
   if (findemail) {
-    let newPass = prompt("enter the new password")
-    findemail.password = newPass
+    let newPass = prompt("enter the new password");
+    findemail.password = newPass;
   } else {
-    alert("email are wrong")
+    alert("email are wrong");
   }
 };
-//changePassword();
+// main prompt
 const choosing = () => {
   let choose = prompt(
     "choose what you want and type it : SignUp or LogIn or Change Password or exict"
@@ -150,11 +188,11 @@ const choosing = () => {
   //    "choose what you want and type it : SignUp or LogIn or Change Password or exict"
   //  );
   //}
-  if (choose == "SignUp") {
-    //signUp();
-  } else if (choose == "LogIn") {
-    //logIn()
-  } else if (choose == "ChangePassword") {
+  if (choose.toLowerCase() == "signup") {
+    signUp();
+  } else if (choose.toLowerCase() == "login") {
+    logIn();
+  } else if (choose.toLowerCase() == "change password") {
     changePassword();
   }
 };
